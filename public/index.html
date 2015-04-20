@@ -19,6 +19,8 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
+    <script type="text/javascript" src="/node_modules/angular/angular.js"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,7 +32,7 @@
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" ng-app="app">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -47,7 +49,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-right" ng-controller="GetDateCtrl">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
                         <a class="page-scroll" href="#page-top"></a>
@@ -60,6 +62,9 @@
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                    <li>
+                        <span ng-bind="datetime" style="line-height: 50px;"></span>
                     </li>
                 </ul>
             </div>
@@ -74,53 +79,65 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Plan Your Life</h1>
-                    <!-- <p><strong>Usage Instructions:</strong> Make sure to include the <code>scrolling-nav.js</code>, <code>jquery.easing.min.js</code>, and <code>scrolling-nav.css</code> files. To make a link smooth scroll to another section on the page, give the link the <code>.page-scroll</code> class and set the link target to a corresponding ID on the page.</p> -->
-                    <a class="btn btn-default page-scroll" href="#about">getting started</a>
+                    <a class="btn btn-default page-scroll" href="#about">Getting Started</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section">
+    <section id="about" class="about-section" ng-controller="DesignCtrl">
         <div class="container">
+        <form>
             <div class="row">
                 <h2>Design Daliy-Life</h2>
             </div>
             <div class="row" style="margin-top: 50px;">
+
                 <div class="col-lg-3">
+                    <!-- From time group -->
                     <div class="input-group">
                       <div class="input-group-addon">&nbsp;From&nbsp;</div>
-                      <select class="form-control" size="5">
-                          <option>1</option>
-                          <option>1</option>
-                          <option>1</option>
-                      </select>
-                      <div class="input-group-addon">Hour</div>
+                          <select class="form-control" size="5">
+                              <option ng-repeat="h in fromList" ng-bind="h"></option>
+                          </select>
+                      <div class="input-group-addon">&nbsp;Hour&nbsp;&nbsp;</div>
                     </div>
+                    <!-- From time group -->
+                    <!-- During time group -->
                     <div class="input-group">
                       <div class="input-group-addon">During</div>
-                      <select class="form-control" size="5">
-                          <option>1</option>
-                          <option>1</option>
-                          <option>1</option>
-                      </select>
-                      <div class="input-group-addon">Hour</div>
+                          <select class="form-control" size="5">
+                              <option ng-repeat="m in duringList" ng-bind="m" ng-selected="selected"></option>
+                          </select>
+                      <div class="input-group-addon">Minute</div>
+                    </div>
+                    <!-- During time group -->
+            </div>
+                <!-- textare -->
+                <div class="col-lg-9">
+                    <textarea class="form-control" rows="9" placeholder="Record Something..."></textarea>
                 </div>
-            </div>
-            <div class="col-lg-9">
-                <textarea class="form-control" rows="9" placeholder="Record Something..."></textarea>
-            </div>
+                <!-- textare -->
             </div>
 
             <div class="row" style="margin-top: 30px;">
+
+                <!-- reset button -->
                 <div class="col-lg-6">
-                    <button type="button" class="btn btn-default btn-lg btn-block">Reset</button>
+                    <button type="reset" class="btn btn-default btn-lg btn-block">Reset</button>
                 </div>
+                <!-- reset button -->
+
+                <!-- save button -->
                 <div class="col-lg-6">
-                    <button type="button" class="btn btn-success btn-lg btn-block">Save</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="save()">Save</button>
                 </div>
+                <!-- save button -->
+
             </div>
+        </form>
+            
         </div>
     </section>
 
@@ -146,9 +163,12 @@
         </div>
     </section>
 
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
+    <!-- Controller Code Angular -->
+    <script type="text/javascript" src="controller/app.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
