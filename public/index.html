@@ -46,7 +46,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">Welcome</a>
+                <a class="navbar-brand page-scroll" href="#page-top">Plan Designer</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -179,12 +179,13 @@
                             <table style="width:100%;">
                                 <tr>
                                     <td>
-                                         <a href="" role="button" class="btn-record">check</a>
+                                         <a href="" role="button" class="btn-unworking">check</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td> 
-                                         <a href="" role="button" class="btn-record">cancel</a>
+                                         <a href="" role="button" class="btn-unworking" ng-hide="d.status" ng-click="cancel(d.from)">cancel</a>
+                                         <a href="" role="button" class="btn-working" ng-show="d.status"></a>
                                     </td>
                                 </tr>
                             </table>

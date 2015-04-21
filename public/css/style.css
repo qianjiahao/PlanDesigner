@@ -11,8 +11,18 @@
 a{
 	text-decoration: none;
 }
+.btn-working{
+	display: block;
+	width: 100%;
+	height: 28px;
+	background-color: #33FF66;
+	color: #fff;
+	font-weight: 600;
+	line-height: 28px;
+	border-radius: 5px;
+}
 
-.btn-record{
+.btn-unworking{
 
 	display: block;
 	width: 100%;
@@ -23,7 +33,7 @@ a{
 	line-height: 28px;
 	border-radius: 5px;
 }
-.btn-record:hover{
+.btn-unworking:hover{
 
     background-color: #ff0000;
     color: #f9f9f9;

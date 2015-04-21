@@ -31,7 +31,7 @@
 				fromList.push(hour + ' ' + amOrPm);
 			}
 
-			$scope.fromList = filter(fromList,existTimeList);
+			$scope.fromList = filter(fromList, existTimeList);
 
 			// End: time of from
 
@@ -42,7 +42,7 @@
 
 		// Begin : time of duration
 
-		for (var durationMinutes = 5,i = durationMinutes , min, durationList = []; i < 60; i += 5) {
+		for (var durationMinutes = 5, i = durationMinutes, min, durationList = []; i < 60; i += 5) {
 			min = i + ' min';
 			durationList.push(min);
 		}
@@ -57,7 +57,8 @@
 				from: $scope.fromTime,
 				duration: $scope.durationTime,
 				theme: $scope.theme,
-				plan: $scope.plan
+				plan: $scope.plan,
+				status: false
 			});
 			existTimeList.push($scope.fromTime);
 			$timeout(myTimeout, 0);
@@ -70,9 +71,51 @@
 		};
 		// End : function save
 
+		var checkTime = function() {
 
+			var date = new Date();
+
+
+
+			$timeout(checkTime, 1000 * 60 * 1);
+		}
+
+		$timeout(checkTime, 0);
+
+		$scope.cancel = function(time) {
+
+			console.log($scope.designedTimeList);
+
+			remove(existTimeList, time);
+			$timeout(myTimeout, 0);
+			removeDesigned($scope.designedTimeList, time);
+			console.log(existTimeList);
+		}
 
 	});
+
+	var removeDesigned = function(sou, tar) {
+
+		sou.map(function(ele, index) {
+
+			if (ele.from === tar) {
+
+				sou.splice(index, 1);
+			};
+
+		});
+
+		return sou;
+	}
+
+	var remove = function(sou, tar) {
+
+		var index = sou.indexOf(tar);
+
+		sou.splice(index, 1);
+
+		return sou;
+	};
 
 	var filter = function(sou, tar) {
 
