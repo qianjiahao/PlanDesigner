@@ -11,16 +11,30 @@
 a{
 	text-decoration: none;
 }
+
 .btn-working{
 	display: block;
 	width: 100%;
 	height: 28px;
-	background-color: #33FF66;
+	background-color: #76EEC6;
 	color: #fff;
 	font-weight: 600;
 	line-height: 28px;
 	border-radius: 5px;
 }
+
+
+.btn-done{
+	display: block;
+	width: 100%;
+	height: 28px;
+	background-color: #C1CDCD;
+	color: #fff;
+	font-weight: 600;
+	line-height: 28px;
+	border-radius: 5px;
+}
+
 
 .btn-unworking{
 
@@ -33,6 +47,36 @@ a{
 	line-height: 28px;
 	border-radius: 5px;
 }
+
+
+.btn-working,.btn-done:visited{
+	text-decoration: none;
+	color: #fff;
+}
+
+.btn-unworking:visited{
+	text-decoration: none;
+}
+
+.btn-unworking,.btn-working,.btn-done:active{
+	text-decoration: none;
+}
+
+
+.btn-working:hover{
+	background-color: #76EEC6;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.btn-done:hover{
+	background-color: #C1CDCD;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .btn-unworking:hover{
 
     background-color: #ff0000;
@@ -40,5 +84,5 @@ a{
 	text-decoration: none;
     transition:color .2s linear;
     -webkit-transition: color .2s linear;
-
 }
+

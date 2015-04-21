@@ -184,8 +184,9 @@
                                 </tr>
                                 <tr>
                                     <td> 
-                                         <a href="" role="button" class="btn-unworking" ng-hide="d.status" ng-click="cancel(d.from)">cancel</a>
-                                         <a href="" role="button" class="btn-working" ng-show="d.status"></a>
+                                         <a href="" role="button" class="btn-unworking" ng-show="d.status == '0'" ng-click="cancel(d.from)">cancel</a>
+                                         <a href="" role="button" class="btn-working" ng-show="d.status == '1'" disabled>doing</a>
+                                         <a href="" role="button" class="btn-done" ng-show="d.status == '-1'">done</a>
                                     </td>
                                 </tr>
                             </table>
