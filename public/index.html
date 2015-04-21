@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Scrolling Nav - Start Bootstrap Template</title>
+    <title>PlanDesigner</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,9 +19,9 @@
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <!-- gulp-connect -->
-    <script type="text/javascript" src="/node_modules/angular/angular.js"></script>
+    <!-- // <script type="text/javascript" src="/node_modules/angular/angular.js"></script> -->
     <!-- browser -->
-    <!-- // <script type="text/javascript" src="../node_modules/angular/angular.js"></script> -->
+    <script type="text/javascript" src="../node_modules/angular/angular.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,13 +61,13 @@
 
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">Record</a>
+                        <a class="page-scroll" href="#services">Plan Wall</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <span ng-bind="datetime" style="line-height: 50px;"></span>
+                        <span ng-bind="datetime" style="line-height: 50px;margin-left: 16px;"></span>
                     </li>
                 </ul>
             </div>
@@ -80,7 +80,7 @@
     <section id="intro" class="intro-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="color: #fff;">
                     <h1>Plan Your Life</h1>
                     <a class="btn btn-default page-scroll" href="#about">Getting Started</a>
                 </div>
@@ -154,8 +154,8 @@
     <section id="services" class="services-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <h1>Record Section</h1>
+                <div class="col-lg-12" style="color: #fff;">
+                    <h1>Plan Wall</h1>
                 </div>
             </div>
             <div class="row">
@@ -165,11 +165,8 @@
                     <h3>{{d.theme}}</h3>
                     <p class="ellipsis">{{d.plan}}</p>
                     <div class="col-sm-12">
-                        <div class="col-sm-6" style="text-align: left;line-height: 28px;">
+                        <div style="text-align: left;line-height: 28px;width:50%;float: left;">
                             <table>
-                                <!-- <tr>
-                                    <td style="text-align: right;">User</td><td>{{d.uesrname}}</td>
-                                </tr> -->
                                 <tr>
                                     <td style="text-align: right;padding-right: 5px;">From</td><td><span class="label label-default">{{d.from}}</span></td>
                                 </tr>
@@ -178,27 +175,23 @@
                                 </tr>
                             </table>
                         </div>
-                        <!-- <div class="col-sm-3">
-                            <ul class="list-group">
-                              <li class="list-group-item">{{d.uesrname}}</li>
-                              <li class="list-group-item">{{d.from}}</li>
-                              <li class="list-group-item">{{d.during}}</li>
-                            </ul>
-
-                        </div> -->
-                        <div class="col-sm-6">
-                            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                                <!-- <button type="button" class="btn btn-default">check</button>
-                                <button type="button" class="btn btn-default">cancel</button> -->
-                                <a href="" role="button" class="btn-record">check</a>
-                                <a href="" role="button" class="btn-record">cancel</a>
-                            </div>
+                        <div style="width:50%;float: left;text-align: center;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>
+                                         <a href="" role="button" class="btn-record">check</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> 
+                                         <a href="" role="button" class="btn-record">cancel</a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                    <!-- <span>user:{{d.uesrname}}</span>
-                    <span>from:{{d.from}}</span><span>duringTime:{{d.during}}</span>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
-                  </div>
+                  </div>  
+                </div>
                 </div>
               </div>
             </div>
