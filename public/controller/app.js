@@ -12,20 +12,20 @@
 			$timeout(myTimeout, 1000);
 		}
 
-		$timeout(myTimeout, 1000);
+		$timeout(myTimeout, 0);
 
 	});
 
 
 	app.controller('DesignCtrl', function($scope, $timeout) {
 
-		var designedTimeList = [];
+		$scope.designedTimeList = [];
 
 		var myTimeout = function() {
 
 			var datetime = new Date();
 			var amOrPm;
-			
+
 
 			// Begin: time of from
 			var fromMinutes = datetime.getMinutes();
@@ -34,41 +34,53 @@
 
 			var fromList = [];
 
-			for (var hour = fromHours, i = 0; i < 24; i++,hour++) {
-				hour = hour%24;
+			for (var hour = fromHours, i = 0; i < 24; i++, hour++) {
+				hour = hour % 24;
 				amOrPm = (hour > 11) ? 'pm' : 'am';
-				fromList.push(hour+'-'+amOrPm);
+				fromList.push(hour + '-' + amOrPm);
 			}
-			console.log(fromList);
-
 			$scope.fromList = fromList;
 			// End: time of from
-
-			console.log($scope.selected);
 
 			$timeout(myTimeout, 1000 * 60 * 10);
 		}
 
+		$timeout(myTimeout, 0);
 
-		$timeout(myTimeout, 1000);
-
+		// Begin : time of during
 		var duringMinutes = 5;
 		var duringList = [];
 
-		for(var i = duringMinutes;i<=60;i+=5){
+		for (var i = duringMinutes; i <= 60; i += 5) {
 			duringList.push(i);
 		}
 
 		$scope.duringList = duringList;
+		// End : time of druing
 
-		$scope.save =function () {
-			designedTimeList.push({
-				from:$scope.selected
+
+		// Begin : function save
+		$scope.save = function() {
+			$scope.designedTimeList.push({
+				username: 'william',
+				from: $scope.fromTime,
+				during: $scope.duringTime,
+				theme: $scope.theme,
+				record: $scope.record
 			});
-
-			console.log(designedTimeList);
+			$scope.fromTime = '';
+			$scope.duringTime = '';
+			$scope.theme = '';
+			$scope.record = '';
+			$scope.remain = 23;
+			console.log($scope.user);
+			console.log($scope.designedTimeList);
 		}
+		// End : function save
+
 		
+
+
 
 
 

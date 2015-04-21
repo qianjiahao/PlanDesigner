@@ -18,8 +18,10 @@
     <link href="css/scrolling-nav.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
+    <!-- gulp-connect -->
     <script type="text/javascript" src="/node_modules/angular/angular.js"></script>
+    <!-- browser -->
+    <!-- // <script type="text/javascript" src="../node_modules/angular/angular.js"></script> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,7 +34,7 @@
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" ng-app="app">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" ng-app="app" ng-controller="DesignCtrl">
 
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -49,13 +51,14 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav navbar-right" ng-controller="GetDateCtrl">
+                <ul class="nav navbar-nav navbar-right" style="font-size: 18px" ng-controller="GetDateCtrl">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
                         <a class="page-scroll" href="#page-top"></a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">Start</a>
+
                     </li>
                     <li>
                         <a class="page-scroll" href="#services">Record</a>
@@ -86,37 +89,43 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about-section" ng-controller="DesignCtrl">
+    <section id="about" class="about-section">
         <div class="container">
-        <form>
+        <form name="form">
             <div class="row">
-                <h2>Design Daliy-Life</h2>
+                <h2>Design Daily-Life</h2>
             </div>
-            <div class="row" style="margin-top: 50px;">
+            <div class="row">
 
                 <div class="col-lg-3">
                     <!-- From time group -->
                     <div class="input-group">
                       <div class="input-group-addon">&nbsp;From&nbsp;</div>
-                          <select class="form-control" size="5">
+                          <!-- <select class="form-control" size="5">
                               <option ng-repeat="h in fromList" ng-bind="h"></option>
-                          </select>
+                          </select> -->
+                          <select class="form-control" ng-model="fromTime" ng-options="f for f in fromList" required></select>
                       <div class="input-group-addon">&nbsp;Hour&nbsp;&nbsp;</div>
                     </div>
                     <!-- From time group -->
                     <!-- During time group -->
-                    <div class="input-group">
+                    <div class="input-group" style="margin-top: 15px">
                       <div class="input-group-addon">During</div>
-                          <select class="form-control" size="5">
-                              <option ng-repeat="m in duringList" ng-bind="m" ng-selected="selected"></option>
-                          </select>
+                          <select class="form-control" ng-model="duringTime" ng-options="d for d in duringList" required></select>
                       <div class="input-group-addon">Minute</div>
                     </div>
                     <!-- During time group -->
+                    <!-- Title --> 
+                    <div class="input-group" style="margin-top: 15px;">
+                      <div class="input-group-addon">Title</div>
+                            <input class="form-control" ng-model="theme" placeholder="brief theme" ng-required="true">
+                      <div class="input-group-addon"></div>
+                    </div>
+                    <!-- Title -->
             </div>
                 <!-- textare -->
                 <div class="col-lg-9">
-                    <textarea class="form-control" rows="9" placeholder="Record Something..."></textarea>
+                    <textarea class="form-control" rows="6" placeholder="Record Something..." ng-model="record" required></textarea>
                 </div>
                 <!-- textare -->
             </div>
@@ -125,13 +134,13 @@
 
                 <!-- reset button -->
                 <div class="col-lg-6">
-                    <button type="reset" class="btn btn-default btn-lg btn-block">Reset</button>
+                    <button type="reset" class="btn btn-default btn-lg btn-block" style="margin-bottom: 15px;">Reset</button>
                 </div>
                 <!-- reset button -->
 
                 <!-- save button -->
                 <div class="col-lg-6">
-                    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="save()">Save</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="save()" ng-disabled="!(fromTime&&duringTime&&theme&&record)">Save</button>
                 </div>
                 <!-- save button -->
 
@@ -146,8 +155,42 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Services Section</h1>
+                    <h1>Record Section</h1>
                 </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-4" ng-repeat="d in designedTimeList">
+                <div class="thumbnail" style="height:180px;">
+                  <div class="caption">
+                    <h3>{{d.theme}}</h3>
+                    <p class="ellipsis">{{d.record}}</p>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <span>
+                                user:{{d.username}}
+                            </span>
+                            <span>
+                                from:{{d.from}}
+                            </span>
+                            <span>
+                                during:{{d.during}}
+                            </span>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <a href="#" class="btn btn-default" role="button">check</a>
+                            </p>
+                            <p>
+                                <a href="#" class="btn btn-warning" role=button>cancel</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- <span>user:{{d.uesrname}}</span>
+                    <span>from:{{d.from}}</span><span>duringTime:{{d.during}}</span>
+                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
     </section>

@@ -36,6 +36,7 @@ of those sections to manage the look and feel of the site. */
     padding-top: 150px;
     text-align: center;
     background: #fff;
+    background-image: url(../img/bgi2.jpg);
 }
 
 .about-section {
@@ -47,9 +48,11 @@ of those sections to manage the look and feel of the site. */
 
 .services-section {
     height: 100%;
-    padding-top: 150px;
+    padding-top: 50px;
     text-align: center;
     background: #fff;
+    background-image: url(../img/bgi.jpg);
+
 }
 
 .contact-section {
