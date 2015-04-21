@@ -26,7 +26,7 @@
 			var fromMinutes = datetime.getMinutes();
 			var fromHours = fromMinutes > 10 ? datetime.getHours() + 1 : datetime.getHours();
 			for (var hour = fromHours, i = 0, fromList = [], amOrPm; i < 24; i++, hour++) {
-				hour = --hour % 24;
+				hour = hour % 24;
 				hour = hour < 10 ? '0' + hour : hour;
 				amOrPm = (hour > 11) ? 'pm' : 'am';
 				fromList.push(hour + ' ' + amOrPm);
