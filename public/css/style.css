@@ -8,7 +8,27 @@
     white-space: nowrap;
 }
 
-.clip{
-	text-overflow:clip;
+a{
+	text-decoration: none;
+}
+
+.btn-record{
+
+	display: block;
+	width: 90px;
+	height: 28px;
+	background-color: #f9f9f9;
+	color: #000;
+	font-weight: 600;
+	line-height: 28px;
+	border-radius: 5px;
+}
+.btn-record:hover{
+
+    background-color: #ff0000;
+    color: #f9f9f9;
+	text-decoration: none;
+    transition:color .2s linear;
+    -webkit-transition: color .2s linear;
 
 }

@@ -108,13 +108,13 @@
                       <div class="input-group-addon">&nbsp;Hour&nbsp;&nbsp;</div>
                     </div>
                     <!-- From time group -->
-                    <!-- During time group -->
+                    <!-- Duration time group -->
                     <div class="input-group" style="margin-top: 15px">
-                      <div class="input-group-addon">During</div>
-                          <select class="form-control" ng-model="duringTime" ng-options="d for d in duringList" required></select>
+                      <div class="input-group-addon">Duration</div>
+                          <select class="form-control" ng-model="durationTime" ng-options="d for d in durationList" required></select>
                       <div class="input-group-addon">Minute</div>
                     </div>
-                    <!-- During time group -->
+                    <!-- Duration time group -->
                     <!-- Title --> 
                     <div class="input-group" style="margin-top: 15px;">
                       <div class="input-group-addon">Title</div>
@@ -125,7 +125,7 @@
             </div>
                 <!-- textare -->
                 <div class="col-lg-9">
-                    <textarea class="form-control" rows="6" placeholder="Record Something..." ng-model="record" required></textarea>
+                    <textarea class="form-control" rows="6" placeholder="Record Something..." ng-model="plan" required></textarea>
                 </div>
                 <!-- textare -->
             </div>
@@ -140,7 +140,7 @@
 
                 <!-- save button -->
                 <div class="col-lg-6">
-                    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="save()" ng-disabled="!(fromTime&&duringTime&&theme&&record)">Save</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="save()" ng-disabled="!(fromTime&&durationTime&&theme&&plan)">Save</button>
                 </div>
                 <!-- save button -->
 
@@ -163,26 +163,36 @@
                 <div class="thumbnail" style="height:180px;">
                   <div class="caption">
                     <h3>{{d.theme}}</h3>
-                    <p class="ellipsis">{{d.record}}</p>
+                    <p class="ellipsis">{{d.plan}}</p>
                     <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <span>
-                                user:{{d.username}}
-                            </span>
-                            <span>
-                                from:{{d.from}}
-                            </span>
-                            <span>
-                                during:{{d.during}}
-                            </span>
+                        <div class="col-sm-6" style="text-align: left;line-height: 28px;">
+                            <table>
+                                <!-- <tr>
+                                    <td style="text-align: right;">User</td><td>{{d.uesrname}}</td>
+                                </tr> -->
+                                <tr>
+                                    <td style="text-align: right;padding-right: 5px;">From</td><td><span class="label label-default">{{d.from}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;padding-right: 5px;">Duration</td><td><span class="label label-default">{{d.duration}}</span></td>
+                                </tr>
+                            </table>
                         </div>
+                        <!-- <div class="col-sm-3">
+                            <ul class="list-group">
+                              <li class="list-group-item">{{d.uesrname}}</li>
+                              <li class="list-group-item">{{d.from}}</li>
+                              <li class="list-group-item">{{d.during}}</li>
+                            </ul>
+
+                        </div> -->
                         <div class="col-sm-6">
-                            <p>
-                                <a href="#" class="btn btn-default" role="button">check</a>
-                            </p>
-                            <p>
-                                <a href="#" class="btn btn-warning" role=button>cancel</a>
-                            </p>
+                            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                                <!-- <button type="button" class="btn btn-default">check</button>
+                                <button type="button" class="btn btn-default">cancel</button> -->
+                                <a href="" role="button" class="btn-record">check</a>
+                                <a href="" role="button" class="btn-record">cancel</a>
+                            </div>
                         </div>
                     </div>
                     <!-- <span>user:{{d.uesrname}}</span>

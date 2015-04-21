@@ -6,12 +6,9 @@
 	app.controller('GetDateCtrl', function($scope, $timeout) {
 
 		var myTimeout = function() {
-
 			$scope.datetime = format(new Date());
-
 			$timeout(myTimeout, 1000);
-		}
-
+		};
 		$timeout(myTimeout, 0);
 
 	});
@@ -20,74 +17,81 @@
 	app.controller('DesignCtrl', function($scope, $timeout) {
 
 		$scope.designedTimeList = [];
+		var existTimeList = [];
 
 		var myTimeout = function() {
-
 			var datetime = new Date();
-			var amOrPm;
-
 
 			// Begin: time of from
 			var fromMinutes = datetime.getMinutes();
-
 			var fromHours = fromMinutes > 10 ? datetime.getHours() + 1 : datetime.getHours();
-
-			var fromList = [];
-
-			for (var hour = fromHours, i = 0; i < 24; i++, hour++) {
+			for (var hour = fromHours, i = 0, fromList = [], amOrPm; i < 24; i++, hour++) {
 				hour = hour % 24;
 				amOrPm = (hour > 11) ? 'pm' : 'am';
-				fromList.push(hour + '-' + amOrPm);
+				fromList.push(hour + ' ' + amOrPm);
 			}
-			$scope.fromList = fromList;
+
+			$scope.fromList = filter(fromList,existTimeList);
+
 			// End: time of from
 
 			$timeout(myTimeout, 1000 * 60 * 10);
-		}
+		};
 
 		$timeout(myTimeout, 0);
 
-		// Begin : time of during
-		var duringMinutes = 5;
-		var duringList = [];
+		// Begin : time of duration
 
-		for (var i = duringMinutes; i <= 60; i += 5) {
-			duringList.push(i);
+		for (var durationMinutes = 5,i = durationMinutes , min, durationList = []; i < 60; i += 5) {
+			min = i + ' min';
+			durationList.push(min);
 		}
-
-		$scope.duringList = duringList;
-		// End : time of druing
+		$scope.durationList = durationList;
+		// End : time of duration
 
 
 		// Begin : function save
 		$scope.save = function() {
 			$scope.designedTimeList.push({
-				username: 'william',
+				// username: 'william',
 				from: $scope.fromTime,
-				during: $scope.duringTime,
+				duration: $scope.durationTime,
 				theme: $scope.theme,
-				record: $scope.record
+				plan: $scope.plan
 			});
+			existTimeList.push($scope.fromTime);
+			$timeout(myTimeout, 0);
+
 			$scope.fromTime = '';
-			$scope.duringTime = '';
+			$scope.durationTime = '';
 			$scope.theme = '';
-			$scope.record = '';
-			$scope.remain = 23;
-			console.log($scope.user);
+			$scope.plan = '';
 			console.log($scope.designedTimeList);
-		}
+		};
 		// End : function save
-
-		
-
-
 
 
 
 	});
 
+	var filter = function(sou, tar) {
+
+		var result = [];
+
+		sou.map(function(s) {
+
+			if (tar.indexOf(s) < 0) {
+				result.push(s);
+			}
+		});
+
+		return result;
+
+	};
+
 
 	var format = function(date) {
+
 		var year = date.getFullYear();
 		var month = date.getMonth() + 1;
 		var day = date.getDate();
@@ -99,8 +103,6 @@
 		//var second = date.getSeconds();
 
 		return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-	}
-
-	return app;
+	};
 
 }());
