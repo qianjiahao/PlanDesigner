@@ -21,3 +21,5 @@ a single page application base angular for design your plan in whole day
 
 简易demo，可以扩展
 thanks a lot 
+
+演示地址：[PlanDesigner](http://qianjiahao.github.io/PlanDesigner/)
