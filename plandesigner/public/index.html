@@ -151,7 +151,9 @@
 
                 <!-- save button -->
                 <div class="col-lg-6">
-                    <button type="button" class="btn btn-success btn-lg btn-block" ng-click="save()" ng-disabled="!(fromTime&&durationTime&&theme&&plan)">Save</button>
+                    <button type="button" class="btn btn-success btn-lg btn-block" ng-if="designedTimeList.length < 6" ng-click="save()" ng-disabled="!(fromTime&&durationTime&&theme&&plan)">Save</button>
+                    <button type="button" class="btn btn-warning btn-lg btn-block" ng-if="designedTimeList.length >= 6" 
+                    style="margin-top: : -15px;" disabled>计划定太多啦~扛不住~</button>
                 </div>
                 <!-- save button -->
 
