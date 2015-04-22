@@ -1,0 +1,110 @@
+*{
+	font-family:Lucida Grande,Arial!important;
+}
+
+.white{
+	color: white;
+}
+
+#select-width{
+	width: 10px;
+}
+
+#message tr{
+	border-bottom: 1px solid #C1CDCD;
+	padding: 3px;
+	text-align: left;
+}
+
+.message{
+	text-align: right;
+	line-height: 30px;
+	border-right:1px solid #C1CDCD;
+	padding-right: 10px;
+}
+
+.ellipsis{
+	text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+a{
+	text-decoration: none;
+}
+
+.btn-working{
+	display: block;
+	width: 100%;
+	height: 28px;
+	background-color: #76EEC6;
+	color: #fff;
+	font-weight: 600;
+	line-height: 28px;
+	border-radius: 5px;
+}
+
+
+.btn-done{
+	display: block;
+	width: 100%;
+	height: 28px;
+	background-color: #C1CDCD;
+	color: #fff;
+	font-weight: 600;
+	line-height: 28px;
+	border-radius: 5px;
+}
+
+
+.btn-unworking{
+
+	display: block;
+	width: 100%;
+	height: 28px;
+	background-color: #f9f9f9;
+	color: #000;
+	font-weight: 600;
+	line-height: 28px;
+	border-radius: 5px;
+}
+
+
+.btn-working,.btn-done:visited{
+	text-decoration: none;
+	color: #fff;
+}
+
+.btn-unworking:visited{
+	text-decoration: none;
+}
+
+.btn-unworking,.btn-working,.btn-done:active{
+	text-decoration: none;
+}
+
+
+.btn-working:hover{
+	background-color: #76EEC6;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.btn-done:hover{
+	background-color: #C1CDCD;
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.btn-unworking:hover{
+
+    background-color: #ff0000;
+    color: #f9f9f9;
+	text-decoration: none;
+    transition:color .2s linear;
+    -webkit-transition: color .2s linear;
+}
+
