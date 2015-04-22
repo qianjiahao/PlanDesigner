@@ -1,5 +1,7 @@
 (function() {
 
+	'use strict';
+
 	var app = angular.module('app', []);
 
 
@@ -16,43 +18,82 @@
 
 	app.controller('DesignCtrl', ['$scope', '$timeout', function($scope, $timeout) {
 
+		/**
+		 * all of data of plan which has been designed
+		 * @type {Array}
+		 */
 		$scope.designedTimeList = [];
+
+		/**
+		 * all of the data of exist plan's time
+		 * @type {Array}
+		 */
 		var existTimeList = [];
 
+		/**
+		 * the step of refresh time
+		 * @type {Number}
+		 */
+		var refreshTime = 5;
+
+		/**
+		 * check the real time,call itself back 
+		 *  and refresh the binded select option in the page every 5 minutes
+		 * @return {fromList}
+		 */
 		var myTimeout = function() {
 			var datetime = new Date();
 
-			// Begin: time of from
 			var fromMinutes = datetime.getMinutes();
-			var fromHours = fromMinutes > 10 ? datetime.getHours() + 1 : datetime.getHours();
-			for (var hour = fromHours, i = 0, fromList = [], amOrPm; i < 24; i++, hour++) {
+
+			var fromHours = fromMinutes > refreshTime ? datetime.getHours() + 1 : datetime.getHours();
+			for (var hour = fromHours, i = 0, fromList = [], amOrPm; i< 24; i++, hour++) {
 				hour = hour % 24;
 				hour = hour < 10 ? '0' + hour : hour;
-				amOrPm = (hour > 11) ? 'pm' : 'am';
+				amOrPm = (hour >11) ? 'pm' : 'am';
 				fromList.push(hour + ' ' + amOrPm);
 			}
 
 			$scope.fromList = filter(fromList, existTimeList);
 
-			// End: time of from
-
-			$timeout(myTimeout, 1000 * 60 * 10);
+			$timeout(myTimeout, 1000 * 60 * refreshTime);
 		};
-
+		$timeout(myTimeout, 0);
 
 
 		// Begin : time of duration
 
-		for (var durationMinutes = 5, i = durationMinutes, min, durationList = []; i < 60; i += 5) {
-			min = i;
-			min = min < 10 ? '0' + min : min;
-			durationList.push(min + ' min');
-		}
-		$scope.durationList = durationList;
-		// End : time of duration
+
+		/**
+		 * generate the minutes and bind it with select option in the front-end page automaticly
+		 * @param  {step}
+		 * @return {$scope.durationList}
+		 */
+		(function(step){
+			var	i 	= 	step,
+				temp
+			;
+
+			$scope.durationList = [];
+			for ( i ; i< 60; i += step) {
+				temp = i < 10 ? '0' + i : i;
+
+				$scope.durationList.push(temp + ' min');
+			}
+			return $scope.durationList;
+
+		})(refreshTime);
 
 
-		// Begin : function save
+		/**
+		 * when you click the save button in the front-end page ,
+		 * the value in the form will push into the array which keep user the data
+		 * @param {string} [from] [the date when plan start]
+		 * @param {string} [duration] [how long did the plan maintain]
+		 * @param {string} [theme] [the topic of the plan]
+		 * @param {string} [plan] [the content of the plan]
+		 * @param {string} [status] [the status of the plan]
+		 */
 		$scope.save = function() {
 			$scope.designedTimeList.push({
 				from: $scope.fromTime,
@@ -70,104 +111,83 @@
 			$scope.durationTime = '';
 			$scope.theme = '';
 			$scope.plan = '';
-			console.log($scope.designedTimeList[0].status);
 		};
-		// End : function save
 
+		/**
+		 * check the plan is from time and duration , and if the relation between the real time and plan time changed , 
+		 * change the status real-time 
+		 * @param {Date} [hour/minute] [real time]
+		 * @param {Date} [existHour/existMinute] [plan's time]
+		 */
 		var checkTime = function() {
-
-			var date = new Date();
-
-			var hour = date.getHours();
-			var minute = date.getMinutes();
-
-			// var temp = $scope.
+			var date 	= new Date(),
+				hour 	= date.getHours(),
+				minute  = date.getMinutes(),
+				temp,
+				existHour,
+				existMinute
+			;
 
 			while ($scope.designedTimeList.length) {
-				// console.log('in');
-				var temp;
-				temp = $scope.designedTimeList[0].from;
-				var existHour = +temp.slice(0, 2);
 
-				// console.log(typeof existHour);
-				temp = $scope.designedTimeList[0].duration;
-				var existMinute = +temp.slice(0, 2);
-				// console.log(typeof existMinute);
+				$scope.designedTimeList.map(function(ele){
 
-				if (existHour == hour && existMinute >= minute) {
-					$scope.designedTimeList[0].status = '1';
-					break;
-					// console.log($scope.designedTimeList[0].status);
-				} else if (existHour < hour || (existHour == hour && existMinute < minute)) {
-					$scope.designedTimeList[0].status = '-1';
-					break;
-					// console.log($scope.designedTimeList[0].status);
+					temp = ele.from.slice(0, 2);
+					existHour = +temp;
 
-				} else {
-					console.log('other');
-					break;
-				}
-				console.log($scope.designedTimeList[0].status);
+					temp = ele.duration.slice(0, 2);
+					existMinute = +temp;
 
-				// console.log($scope.designedTimeList[0]);
+					if (existHour == hour && existMinute >= minute) {
+						$scope.designedTimeList[0].status = '1';
+					} else if (existHour < hour || (existHour == hour && existMinute < minute)) {
+						$scope.designedTimeList[0].status = '-1';
+					}
+
+				});
+				break;
 			}
-			$timeout(checkTime, 1000 * 60 * 1);
-		}
+			$timeout(checkTime, 1000 * 60 * refreshTime);
+		};
+		$timeout(checkTime, 0);
 
 
-		// Begin : cancel plan
+		/**
+		 * when you click the cancel button , the exist hour or minute will destroy ,
+		 * and you can pick the destroy time again from the form .
+		 * @param  {String} [time] [plan's from time which be destroyed]
+		 */
 		$scope.cancel = function(time) {
-
-				console.log($scope.designedTimeList);
-
 				remove(existTimeList, time);
 				$timeout(myTimeout, 0);
 				removeDesigned($scope.designedTimeList, time);
-				console.log(existTimeList);
-			}
-			// End : cancel plan
+		};
 
-
-		$timeout(myTimeout, 0);
-		$timeout(checkTime, 0);
 	}]);
 
 	var removeDesigned = function(sou, tar) {
-
 		sou.map(function(ele, index) {
-
 			if (ele.from === tar) {
-
 				sou.splice(index, 1);
-			};
-
+			}
 		});
-
 		return sou;
-	}
+	};
 
 	var remove = function(sou, tar) {
-
 		var index = sou.indexOf(tar);
-
 		sou.splice(index, 1);
-
 		return sou;
 	};
 
 	var filter = function(sou, tar) {
-
 		var result = [];
-
 		sou.map(function(s) {
-
 			if (tar.indexOf(s) < 0) {
 				result.push(s);
 			}
 		});
-
 		return result;
-
 	};
 
 
