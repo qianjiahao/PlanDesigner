@@ -1,5 +1,26 @@
+*{
+	font-family:Lucida Grande,Arial!important;
+}
+
+.white{
+	color: white;
+}
+
 #select-width{
 	width: 10px;
+}
+
+#message tr{
+	border-bottom: 1px solid #C1CDCD;
+	padding: 3px;
+	text-align: left;
+}
+
+.message{
+	text-align: right;
+	line-height: 30px;
+	border-right:1px solid #C1CDCD;
+	padding-right: 10px;
 }
 
 .ellipsis{

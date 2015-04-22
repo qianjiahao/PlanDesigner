@@ -48,7 +48,7 @@
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" ng-app="app" ng-controller="DesignCtrl">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -62,7 +62,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav navbar-right" style="font-size: 18px" ng-controller="GetDateCtrl">
+                <ul class="nav navbar-nav navbar-right" style="font-size: 18px;" ng-controller="GetDateCtrl">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
                         <a class="page-scroll" href="#page-top"></a>
@@ -82,7 +82,7 @@
                     </li>
 
                     <li>
-                        <span ng-bind="datetime" style="line-height: 50px;margin-left: 16px;"></span>
+                        <span ng-bind="datetime" class="white" style="line-height: 50px;margin-left: 16px;"></span>
                     </li>
                 </ul>
             </div>
@@ -95,7 +95,7 @@
     <section id="intro" class="intro-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12" style="color: #fff;">
+                <div class="col-lg-12 white">
                     <h1>Plan Your Life</h1>
                     <a class="btn btn-default page-scroll" href="#about">Getting Started</a>
                 </div>
@@ -115,12 +115,12 @@
                 <div class="col-lg-3">
                     <!-- From time group -->
                     <div class="input-group">
-                      <div class="input-group-addon">&nbsp;From&nbsp;</div>
+                      <div class="input-group-addon">From&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                           <!-- <select class="form-control" size="5">
                               <option ng-repeat="h in fromList" ng-bind="h"></option>
                           </select> -->
                           <select class="form-control" ng-model="fromTime" ng-options="f for f in fromList" required></select>
-                      <div class="input-group-addon">&nbsp;Hour&nbsp;&nbsp;</div>
+                      <div class="input-group-addon">Hour&nbsp;&nbsp;&nbsp;</div>
                     </div>
                     <!-- From time group -->
                     <!-- Duration time group -->
@@ -132,15 +132,15 @@
                     <!-- Duration time group -->
                     <!-- Title --> 
                     <div class="input-group" style="margin-top: 15px;">
-                      <div class="input-group-addon">Title</div>
-                            <input class="form-control" ng-model="theme" placeholder="brief theme" ng-required="true">
-                      <div class="input-group-addon"></div>
+                      <div class="input-group-addon">Theme&nbsp;&nbsp;&nbsp;</div>
+                            <input class="form-control" ng-model="theme" placeholder="purpose" ng-required="true">
+                      <div class="input-group-addon">be brief</div>
                     </div>
                     <!-- Title -->
             </div>
                 <!-- textare -->
                 <div class="col-lg-9">
-                    <textarea class="form-control" rows="6" placeholder="Record Something..." ng-model="plan" required></textarea>
+                    <textarea class="form-control" rows="6" placeholder="introduction" ng-model="plan" required></textarea>
                 </div>
                 <!-- textare -->
             </div>
@@ -171,7 +171,7 @@
     <section id="services" class="services-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12" style="color: #fff;">
+                <div class="col-lg-12 white">
                     <h1>Plan Wall</h1>
                 </div>
             </div>
@@ -223,19 +223,28 @@
             <div class="row">
                 <div class="col-lg-12" style="color: #C1CDCD;">
                     <h1>─=≡Σ((( つ•̀ω•́)つ动感光波哔哔哔!!!</h1>
+
+                    <p style="margin-top: 30px;">
+                        时间流逝如水，以此程序自省
+                    </p>
                 </div>
             </div>
-            <div class="col-sm-3" style="float: right;margin-top: 250px;background: #fff;border-radius: 10px;">
-                <table style="text-align: left;">
-                    <tr style="border-bottom: 1px solid #C1CDCD;padding: 3px;">
-                        <td style="text-align: right;line-height: 30px;border-right:1px solid #C1CDCD;padding-right: 10px; ">author</td><td style="padding-left: 10px;">Qian Jiahao</td>
+            <div class="col-sm-4" style="float: right;margin-top: 150px;background: #fff;border-radius: 10px;">
+                <table id="message">
+                    <tr>
+                        <td class="message">Author</td><td style="padding-left: 10px;">Qian Jiahao</td>
                     </tr>
-                    <tr style="border-bottom: 1px solid #C1CDCD;padding: 3px;">
-                        <td style="text-align: right;line-height: 30px;border-right:1px solid #C1CDCD; padding-right: 10px;">Tel</td><td style="padding-left: 10px;">18661201390</td>
+                    <tr>
+                        <td class="message">Github</td><td style="padding-left: 10px;"><a href="https://github.com/qianjiahao">qianjiahao</a></td>
                     </tr>
-                    <tr style="padding: 3px;">
-                        <td style="text-align: right;line-height: 30px;border-right:1px solid #C1CDCD;padding-right: 10px; ">Email</td><td style="padding-left: 10px;">m18661201390@163.com</td>
+                    <tr>
+                        <td class="message">Tel</td><td style="padding-left: 10px;">18661201390</td>
                     </tr>
+                    <tr style="border-bottom: 0;">
+                        <td class="message">Email</td><td style="padding-left: 10px;">w3lliamqjh@gmail.com</td>
+                    </tr>
+                    
+
                 </table>
             </div>
         </div>
