@@ -46,7 +46,7 @@
 		for (var durationMinutes = 5, i = durationMinutes, min, durationList = []; i < 60; i += 5) {
 			min = i;
 			min = min < 10 ? '0' + min : min;
-			durationList.push(min+' min');
+			durationList.push(min + ' min');
 		}
 		$scope.durationList = durationList;
 		// End : time of duration
@@ -63,8 +63,8 @@
 			});
 			existTimeList.push($scope.fromTime);
 
-			$timeout(myTimeout,0);
-			$timeout(checkTime,0);
+			$timeout(myTimeout, 0);
+			$timeout(checkTime, 0);
 
 			$scope.fromTime = '';
 			$scope.durationTime = '';
@@ -91,7 +91,7 @@
 
 				// console.log(typeof existHour);
 				temp = $scope.designedTimeList[0].duration;
-				var existMinute = +temp.slice(0,2);
+				var existMinute = +temp.slice(0, 2);
 				// console.log(typeof existMinute);
 
 				if (existHour == hour && existMinute >= minute) {
@@ -121,15 +121,15 @@
 				console.log($scope.designedTimeList);
 
 				remove(existTimeList, time);
-				$timeout(myTimeout,0);
+				$timeout(myTimeout, 0);
 				removeDesigned($scope.designedTimeList, time);
 				console.log(existTimeList);
 			}
 			// End : cancel plan
 
 
-		$timeout(myTimeout,0);
-		$timeout(checkTime,0);
+		$timeout(myTimeout, 0);
+		$timeout(checkTime, 0);
 	}]);
 
 	var removeDesigned = function(sou, tar) {
