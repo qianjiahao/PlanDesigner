@@ -34,10 +34,10 @@
 		 * the step of refresh time
 		 * @type {Number}
 		 */
-		var refreshTime = 5;
+		var refreshTime = 1;
 
 		/**
-		 * check the real time,call itself back 
+		 * check the real time,call itself back
 		 *  and refresh the binded select option in the page every 5 minutes
 		 * @param {Date} [hour] [right now hour]
 		 * @param {Number} [i] [iterator]
@@ -47,19 +47,19 @@
 		 */
 		var myTimeout = function() {
 			var datetime = new Date(),
-				hour = datetime.getMinutes() > refreshTime ? datetime.getHours() + 1 : datetime.getHours(),
-				i    = 0,
+				hour = datetime.getMinutes() > refreshTime ? datetime.getHours() + 1  : datetime.getHours(),
+				i = 0,
 				list = [],
 				temp,
-				ap
-			;
+				ap;
 
-			while(i < 24){
-				hour           = hour % 24 ;
-				temp           = hour < 10 ? '0' + hour : hour ;
-				ap             = hour > 11 ? 'pm'       : 'am' ;
-				i              = i    + 1  ;
-				hour           = hour + 1  ;
+			while (i < 24) {
+				hour = hour % 24;
+				temp = hour < 10 ? '0' + hour : hour;
+				ap = hour >
+					11 ? 'pm' : 'am';
+				i = i + 1;
+				hour = hour + 1;
 				list.push(temp + ' ' + ap);
 			}
 
@@ -78,13 +78,12 @@
 		 * @param {Number} [step] [the interval of the refresh time]
 		 * @return {$scope.durationList}
 		 */
-		(function(step){
-			var	i = step,
-				temp
-			;
+		(function(step) {
+			var i = step,
+				temp;
 
 			$scope.durationList = [];
-			for ( i ; i< 60; i += step) {
+			for (i; i < 60; i += step) {
 				temp = i < 10 ? '0' + i : i;
 
 				$scope.durationList.push(temp + ' min');
@@ -105,33 +104,33 @@
 		 */
 		$scope.save = function() {
 			$scope.designedTimeList.push({
-				from:     $scope.fromTime,
+				from: $scope.fromTime,
 				duration: $scope.durationTime,
-				theme:    $scope.theme,
-				plan:     $scope.plan,
-				status:   '0'
+				theme: $scope.theme,
+				plan: $scope.plan,
+				status: '0'
 			});
 			existTimeList.push($scope.fromTime);
 
 			$timeout(myTimeout, 0);
 			$timeout(checkTime, 0);
 
-			$scope.fromTime     = '';
+			$scope.fromTime = '';
 			$scope.durationTime = '';
-			$scope.theme        = '';
-			$scope.plan         = '';
+			$scope.theme = '';
+			$scope.plan = '';
 		};
 
 		/**
-		 * check the plan is from time and duration , and if the relation between the real time and plan time changed , 
-		 * change the status real-time 
+		 * check the plan is from time and duration , and if the relation between the real time and plan time changed ,
+		 * change the status real-time
 		 * @param {Date} [hour/minute] [real time]
 		 * @param {Date} [existHour/existMinute] [plan's time]
 		 */
 		var checkTime = function() {
-			var date 	= new Date(),
-				hour    = date.getHours(),
-				minute  = date.getMinutes(),
+			var date = new Date(),
+				hour = date.getHours(),
+				minute = date.getMinutes(),
 				temp,
 				existHour,
 				existMinute
@@ -139,18 +138,18 @@
 
 			while ($scope.designedTimeList.length) {
 
-				$scope.designedTimeList.map(function(ele){
+				$scope.designedTimeList.map(function(ele,index) {
 
-					temp      = ele.from.slice(0, 2);
+					temp = ele.from.slice(0, 2);
 					existHour = +temp;
 
-					temp        = ele.duration.slice(0, 2);
+					temp = ele.duration.slice(0, 2);
 					existMinute = +temp;
 
 					if (existHour == hour && existMinute >= minute) {
-						$scope.designedTimeList[0].status = '1';
+						$scope.designedTimeList[index].status = '1';
 					} else if (existHour < hour || (existHour == hour && existMinute < minute)) {
-						$scope.designedTimeList[0].status = '-1';
+						$scope.designedTimeList[index].status = '-1';
 					}
 
 				});
@@ -167,9 +166,9 @@
 		 * @param  {String} [time] [plan's from time which be destroyed]
 		 */
 		$scope.cancel = function(time) {
-				remove(existTimeList, time);
-				$timeout(myTimeout, 0);
-				removeDesigned($scope.designedTimeList, time);
+			remove(existTimeList, time);
+			$timeout(myTimeout, 0);
+			removeDesigned($scope.designedTimeList, time);
 		};
 
 	}]);
@@ -203,14 +202,14 @@
 
 	var format = function(date) {
 
-		var year  = date.getFullYear();
+		var year = date.getFullYear();
 		var month = date.getMonth() + 1;
-		var day   = date.getDate();
+		var day = date.getDate();
 
-		var hour     = date.getHours();
-		var minute   = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
+		var hour = date.getHours();
+		var minute = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
 		//var minute = date.getMinutes();
-		var second   = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
+		var second = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
 		//var second = date.getSeconds();
 
 		return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
