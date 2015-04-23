@@ -28,4 +28,5 @@ thanks a lot
 > 重构了js代码，重构项目结构，添加了js注释
 
 > 4月23日
-> [fix bug] : 错误的提取designedTimeList的index，导致plan的cancel按钮状态异常 [已解决]
+> [fix bug] : 错误的提取designedTimeList的index，导致plan的cancel按钮状态异常 [已解决];
+>[add icon]
