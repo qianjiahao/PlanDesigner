@@ -39,22 +39,31 @@
 		/**
 		 * check the real time,call itself back 
 		 *  and refresh the binded select option in the page every 5 minutes
-		 * @return {fromList}
+		 * @param {Date} [hour] [right now hour]
+		 * @param {Number} [i] [iterator]
+		 * @param {Array} [list] [store the hour]
+		 * @param {String} [temp] [format the hour]
+		 * @param {String} [ap] [format the hour as 'ap' or 'pm']
 		 */
 		var myTimeout = function() {
-			var datetime = new Date();
+			var datetime = new Date(),
+				hour = datetime.getMinutes() > refreshTime ? datetime.getHours() + 1 : datetime.getHours(),
+				i    = 0,
+				list = [],
+				temp,
+				ap
+			;
 
-			var fromMinutes = datetime.getMinutes();
-
-			var fromHours = fromMinutes > refreshTime ? datetime.getHours() + 1 : datetime.getHours();
-			for (var hour = fromHours, i = 0, fromList = [], amOrPm; i< 24; i++, hour++) {
-				hour = hour % 24;
-				hour = hour < 10 ? '0' + hour : hour;
-				amOrPm = (hour >11) ? 'pm' : 'am';
-				fromList.push(hour + ' ' + amOrPm);
+			while(i < 24){
+				hour           = hour % 24 ;
+				temp           = hour < 10 ? '0' + hour : hour ;
+				ap             = hour > 11 ? 'pm'       : 'am' ;
+				i              = i    + 1  ;
+				hour           = hour + 1  ;
+				list.push(temp + ' ' + ap);
 			}
 
-			$scope.fromList = filter(fromList, existTimeList);
+			$scope.fromList = filter(list, existTimeList);
 
 			$timeout(myTimeout, 1000 * 60 * refreshTime);
 		};
@@ -66,11 +75,11 @@
 
 		/**
 		 * generate the minutes and bind it with select option in the front-end page automaticly
-		 * @param  {step}
+		 * @param {Number} [step] [the interval of the refresh time]
 		 * @return {$scope.durationList}
 		 */
 		(function(step){
-			var	i 	= 	step,
+			var	i = step,
 				temp
 			;
 
@@ -88,29 +97,29 @@
 		/**
 		 * when you click the save button in the front-end page ,
 		 * the value in the form will push into the array which keep user the data
-		 * @param {string} [from] [the date when plan start]
-		 * @param {string} [duration] [how long did the plan maintain]
-		 * @param {string} [theme] [the topic of the plan]
-		 * @param {string} [plan] [the content of the plan]
-		 * @param {string} [status] [the status of the plan]
+		 * @param {String} [from] [the date when plan start]
+		 * @param {String} [duration] [how long did the plan maintain]
+		 * @param {String} [theme] [the topic of the plan]
+		 * @param {String} [plan] [the content of the plan]
+		 * @param {String} [status] [the status of the plan]
 		 */
 		$scope.save = function() {
 			$scope.designedTimeList.push({
-				from: $scope.fromTime,
+				from:     $scope.fromTime,
 				duration: $scope.durationTime,
-				theme: $scope.theme,
-				plan: $scope.plan,
-				status: '0'
+				theme:    $scope.theme,
+				plan:     $scope.plan,
+				status:   '0'
 			});
 			existTimeList.push($scope.fromTime);
 
 			$timeout(myTimeout, 0);
 			$timeout(checkTime, 0);
 
-			$scope.fromTime = '';
+			$scope.fromTime     = '';
 			$scope.durationTime = '';
-			$scope.theme = '';
-			$scope.plan = '';
+			$scope.theme        = '';
+			$scope.plan         = '';
 		};
 
 		/**
@@ -121,7 +130,7 @@
 		 */
 		var checkTime = function() {
 			var date 	= new Date(),
-				hour 	= date.getHours(),
+				hour    = date.getHours(),
 				minute  = date.getMinutes(),
 				temp,
 				existHour,
@@ -132,10 +141,10 @@
 
 				$scope.designedTimeList.map(function(ele){
 
-					temp = ele.from.slice(0, 2);
+					temp      = ele.from.slice(0, 2);
 					existHour = +temp;
 
-					temp = ele.duration.slice(0, 2);
+					temp        = ele.duration.slice(0, 2);
 					existMinute = +temp;
 
 					if (existHour == hour && existMinute >= minute) {
@@ -191,16 +200,17 @@
 	};
 
 
+
 	var format = function(date) {
 
-		var year = date.getFullYear();
+		var year  = date.getFullYear();
 		var month = date.getMonth() + 1;
-		var day = date.getDate();
+		var day   = date.getDate();
 
-		var hour = date.getHours();
-		var minute = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
+		var hour     = date.getHours();
+		var minute   = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
 		//var minute = date.getMinutes();
-		var second = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
+		var second   = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
 		//var second = date.getSeconds();
 
 		return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
