@@ -31,4 +31,5 @@ thanks a lot
 > [fix bug] : 错误的提取designedTimeList的index，导致plan的cancel按钮状态异常 [已解决];
 >[add icon]
 
+> 4月24日
 > [standardization]依据Angular规范，规范化代码。
