@@ -2,21 +2,23 @@
 
 	'use strict';
 
-	var app = angular.module('app', []);
 
+	angular
+		.module('app', [])
+		.controller('GetDateCtrl', ['$scope', '$timeout', GetDateCtrl])
+		.controller('DesignCtrl', ['$scope', '$timeout', DesignCtrl])
+	;
 
-	app.controller('GetDateCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+	function GetDateCtrl($scope, $timeout) {
 
 		var myTimeout = function() {
 			$scope.datetime = format(new Date());
 			$timeout(myTimeout, 1000);
 		};
 		$timeout(myTimeout, 0);
+	}
 
-	}]);
-
-
-	app.controller('DesignCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+	function DesignCtrl($scope, $timeout) {
 
 		/**
 		 * all of data of plan which has been designed
@@ -47,7 +49,7 @@
 		 */
 		var myTimeout = function() {
 			var datetime = new Date(),
-				hour = datetime.getMinutes() > refreshTime ? datetime.getHours() + 1  : datetime.getHours(),
+				hour = datetime.getMinutes() > refreshTime ? datetime.getHours() + 1 : datetime.getHours(),
 				i = 0,
 				list = [],
 				temp,
@@ -133,12 +135,11 @@
 				minute = date.getMinutes(),
 				temp,
 				existHour,
-				existMinute
-			;
+				existMinute;
 
 			while ($scope.designedTimeList.length) {
 
-				$scope.designedTimeList.map(function(ele,index) {
+				$scope.designedTimeList.map(function(ele, index) {
 
 					temp = ele.from.slice(0, 2);
 					existHour = +temp;
@@ -171,24 +172,24 @@
 			removeDesigned($scope.designedTimeList, time);
 		};
 
-	}]);
+	}
 
-	var removeDesigned = function(sou, tar) {
+	function removeDesigned(sou, tar) {
 		sou.map(function(ele, index) {
 			if (ele.from === tar) {
 				sou.splice(index, 1);
 			}
 		});
 		return sou;
-	};
+	}
 
-	var remove = function(sou, tar) {
+	function remove(sou, tar) {
 		var index = sou.indexOf(tar);
 		sou.splice(index, 1);
 		return sou;
-	};
+	}
 
-	var filter = function(sou, tar) {
+	function filter(sou, tar) {
 		var result = [];
 		sou.map(function(s) {
 			if (tar.indexOf(s) < 0) {
@@ -196,23 +197,20 @@
 			}
 		});
 		return result;
-	};
+	}
 
 
 
-	var format = function(date) {
-
+	function format(date) {
 		var year = date.getFullYear();
 		var month = date.getMonth() + 1;
 		var day = date.getDate();
-
 		var hour = date.getHours();
 		var minute = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes();
 		//var minute = date.getMinutes();
 		var second = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
 		//var second = date.getSeconds();
-
 		return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-	};
+	}
 
 }());
