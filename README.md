@@ -24,6 +24,8 @@ thanks a lot
 
 ###演示地址：[PlanDesigner](http://qianjiahao.github.io/PlanDesigner/)
 
+####觉得还凑合的话，动动手star哈~
+
 > 4月22日
 > 重构了js代码，重构项目结构，添加了js注释
 
